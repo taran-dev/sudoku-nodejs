@@ -1,0 +1,22 @@
+{
+  "name": "sudoku-nodejs",
+  "version": "1.0.0",
+  "description": "Sudoku",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taran-dev/sudoku-nodejs.git"
+  },
+  "author": "Taran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taran-dev/sudoku-nodejs/issues"
+  },
+  "homepage": "https://github.com/taran-dev/sudoku-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
