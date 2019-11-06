@@ -47,9 +47,18 @@ app.get("/sudoku/board", (req, res) => {
     //     [1, 8, 0, 0, 0, 0, 4, 0, 0],
     // ];
 
+    //Randomizing first row, to ensure every board generation is randomized
+    var initRow = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    for (let i = initRow.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
+    }
+    board[0] = initRow;
+
     solveBoard(board);
     console.log(board);
 
+    //6. Return 9x9 complete array
     res.send(board);
 });
 
@@ -132,7 +141,7 @@ function solveBoard(board) {
             board[rowLoc][colLoc] = num;
 
             if(solveBoard(board, arrLength)) {
-                return true; //Complete Solving
+                return true; //Solving Complete
             } else {
                 board[rowLoc][colLoc] = 0;
             }
