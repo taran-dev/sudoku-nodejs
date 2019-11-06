@@ -21,8 +21,49 @@ const app = express();
 //GET 9x9 Valid Sudoku Array
 app.get("/sudoku/board", (req, res) => {
 
-    //Generate empty 9x9 Array
-    //
+    //1. Generate default 9x9 Array
+    var board = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+
+    var rowLength = board.length;
+    var colLength = board[0].length;
+
+    //2. Search to find next empty location in array
+    var rowLoc = 0;
+    var colLoc = 0;
+    var IsLocationFound = false;
+    for (var i = 0; i < 9; i++) {
+        for(var j = 0; j < 9; j++) {
+
+            if(_board[i][j] == 0) { //Found Empty location
+                rowLoc = i;
+                colLoc = j;
+                IsLocationFound = true;
+                break;
+            }
+        }
+
+        if(IsLocationFound) {
+            break;
+        }
+    }
+    if(!IsLocationFound)
+    {
+        //Return Filled Array
+    }
+
+
+    console.log("Empty Row Location: ", rowLoc);
+    console.log("Empty Col Location: ", colLoc);
 
     res.send([1, 2, 3]);
 });
