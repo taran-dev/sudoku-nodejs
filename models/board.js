@@ -11,8 +11,8 @@ Using Backtracking Algorithm (generating empty array and adding item one by one)
 >>>>b. Check validity by col to insert in location
 >>>>c. Check validity by 3x3 grid (respective to that location) to insert in location
 >>>>d. If all validations successful, insert item into Array. Else loop back to step 3.
-5. Repeat step 2, until all locations filled
-6. Return 9x9 complete array
+>>5. Repeat step 2, until all locations filled
+>>6. Return 9x9 complete array
 */
 
 const express = require("express");
