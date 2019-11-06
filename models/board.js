@@ -22,7 +22,7 @@ const app = express();
 app.get("/sudoku/board", (req, res) => {
 
     //1. Generate default 9x9 Array
-    var board = [
+    const board = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -33,17 +33,30 @@ app.get("/sudoku/board", (req, res) => {
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
+    
+    //Test Solving Board
+    // const board = [
+    //     [0, 0, 8, 0, 0, 0, 0, 2, 4],
+    //     [0, 0, 0, 4, 9, 8, 0, 0, 5],
+    //     [4, 6, 0, 0, 0, 5, 8, 0, 0],
+    //     [0, 7, 0, 0, 5, 0, 9, 0, 0],
+    //     [9, 0, 0, 8, 0, 6, 0, 0, 3],
+    //     [0, 0, 5, 0, 4, 0, 0, 6, 0],
+    //     [0, 0, 6, 5, 0, 0, 0, 7, 9],
+    //     [7, 0, 0, 9, 6, 1, 0, 0, 0],
+    //     [1, 8, 0, 0, 0, 0, 4, 0, 0],
+    // ];
 
     solveBoard(board);
+    console.log(board);
 
-    res.send([1, 2, 3]);
+    res.send(board);
 });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
 });
-
 
 function checkValidity(board, rowLoc, colLoc, num) {
     
@@ -63,19 +76,13 @@ function checkValidity(board, rowLoc, colLoc, num) {
 
     //c. Check validity by 3x3 grid (respective to that location) to insert in location
     var size = Math.sqrt(board.length);
-    var boxRowStartLoc = rowLoc + rowLoc % size;
-    var boxColStartLoc = colLoc + colLoc % size;
+    var boxRowStartLoc = rowLoc - rowLoc % size;
+    var boxColStartLoc = colLoc - colLoc % size;
 
     for(var i = boxRowStartLoc; i < boxRowStartLoc + size; i++) {
         for(var j = boxColStartLoc; j < boxColStartLoc + size; j++) {
             if(board[i][j] == num) {
                 return false;
-            } else {
-                console.log("----");
-                console.log("boxRowStartLoc: " + boxRowStartLoc);
-                console.log("boxColStartLoc: " + boxColStartLoc);
-                console.log("Adding num: " + num);
-                console.log(`Location: ${i},${j}`);
             }
         }
     }
@@ -85,13 +92,11 @@ function checkValidity(board, rowLoc, colLoc, num) {
 
 }
 
-
 function solveBoard(board) {
     var arrLength = board.length; //Since symmetric array, length will be equal on both sides
     //var colLength = board[0].length;
 
     //2. Search to find next empty location in array
-    
     var rowLoc = 0;
     var colLoc = 0;
     var IsLocationFound = false;
@@ -113,13 +118,10 @@ function solveBoard(board) {
     if(!IsLocationFound)
     {
         //Return Filled Array
+        return true;
     }
 
-    //console.log("Empty Row Location: ", rowLoc);
-    //console.log("Empty Col Location: ", colLoc);
-
     //3. Generate new number between 1 to 9
-    //var num = Math.floor(Math.random() * 9) + 1;
     for (var num = 1; num <= arrLength; num++) {
 
         //4. Validate before inserting in found location
@@ -128,19 +130,13 @@ function solveBoard(board) {
         if(isValid) {
 
             board[rowLoc][colLoc] = num;
-            console.log("Sudoku Board So Far");
-            console.log(board);
 
             if(solveBoard(board, arrLength)) {
-                //Complete
-                //6. Return 9x9 complete array
-                console.log("Sudoku Board Complete");
-                console.log(board);
+                return true; //Complete Solving
             } else {
                 board[rowLoc][colLoc] = 0;
             }
         }
     }
-
-    
+    return false;
 }
