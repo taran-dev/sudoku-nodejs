@@ -33,30 +33,16 @@ app.get("/sudoku/board", (req, res) => {
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
-    
-    //Test Solving Board
-    // const board = [
-    //     [0, 0, 8, 0, 0, 0, 0, 2, 4],
-    //     [0, 0, 0, 4, 9, 8, 0, 0, 5],
-    //     [4, 6, 0, 0, 0, 5, 8, 0, 0],
-    //     [0, 7, 0, 0, 5, 0, 9, 0, 0],
-    //     [9, 0, 0, 8, 0, 6, 0, 0, 3],
-    //     [0, 0, 5, 0, 4, 0, 0, 6, 0],
-    //     [0, 0, 6, 5, 0, 0, 0, 7, 9],
-    //     [7, 0, 0, 9, 6, 1, 0, 0, 0],
-    //     [1, 8, 0, 0, 0, 0, 4, 0, 0],
-    // ];
 
     //Randomizing first row, to ensure every board generation is randomized
-    //Shuffling initRow using Fisher-Yates technique
     var initRow = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    for (let i = initRow.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
-    }
+
+    //Shuffling initRow using Fisher-Yates algorithm
+    exports.shuffleArray(initRow);
+    
     board[0] = initRow;
 
-    solveBoard(board);
+    exports.solveBoard(board);
     console.log(board);
 
     //6. Return 9x9 complete array
@@ -68,20 +54,20 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
 });
 
-function checkValidity(board, rowLoc, colLoc, num) {
+exports.checkValidity = function(board, rowLoc, colLoc, num) {
     
     //a. Check validity by row to insert in location
-    if(!checkRowValidity(board, rowLoc, num)) {
+    if(!exports.checkRowValidity(board, rowLoc, num)) {
         return false;
     }
 
     //b. Check validity by col to insert in location
-    if(!checkColValidity(board, colLoc, num)) {
+    if(!exports.checkColValidity(board, colLoc, num)) {
         return false;
     }
 
     //c. Check validity by 3x3 grid (respective to that location) to insert in location
-    if(!checkBoxValidity(board, rowLoc, colLoc, num)) {
+    if(!exports.checkBoxValidity(board, rowLoc, colLoc, num)) {
         return false;
     }
 
@@ -90,7 +76,7 @@ function checkValidity(board, rowLoc, colLoc, num) {
 
 }
 
-function checkRowValidity(board, rowLoc, num) {
+exports.checkRowValidity = function(board, rowLoc, num) {
     for(var i = 0; i < board.length; i++) {
         if(board[rowLoc][i] == num) {
             return false;
@@ -99,7 +85,7 @@ function checkRowValidity(board, rowLoc, num) {
     return true;
 }
 
-function checkColValidity(board, colLoc, num) {
+exports.checkColValidity = function(board, colLoc, num) {
     for(var i = 0; i < board.length; i++) {
         if(board[i][colLoc] == num) {
             return false;
@@ -108,7 +94,7 @@ function checkColValidity(board, colLoc, num) {
     return true;
 }
 
-function checkBoxValidity(board, rowLoc, colLoc, num) {
+exports.checkBoxValidity = function(board, rowLoc, colLoc, num) {
     var size = Math.sqrt(board.length);
     var boxRowStartLoc = rowLoc - rowLoc % size;
     var boxColStartLoc = colLoc - colLoc % size;
@@ -123,7 +109,15 @@ function checkBoxValidity(board, rowLoc, colLoc, num) {
     return true;
 }
 
-function solveBoard(board) {
+exports.shuffleArray = function(initRow) {
+    for (let i = initRow.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
+    }
+    //return initRow;
+}
+
+exports.solveBoard = function(board) {
     var arrLength = board.length; //Since symmetric array, length will be equal on both sides
     //var colLength = board[0].length;
 
@@ -156,13 +150,13 @@ function solveBoard(board) {
     for (var num = 1; num <= arrLength; num++) {
 
         //4. Validate before inserting in found location
-        var isValid = checkValidity(board, rowLoc, colLoc, num);
+        var isValid = exports.checkValidity(board, rowLoc, colLoc, num);
 
         if(isValid) {
 
             board[rowLoc][colLoc] = num;
 
-            if(solveBoard(board, arrLength)) {
+            if(exports.solveBoard(board, arrLength)) {
                 return true; //Solving Complete
             } else {
                 board[rowLoc][colLoc] = 0;
