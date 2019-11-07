@@ -48,6 +48,7 @@ app.get("/sudoku/board", (req, res) => {
     // ];
 
     //Randomizing first row, to ensure every board generation is randomized
+    //Shuffling initRow using Fisher-Yates technique
     var initRow = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     for (let i = initRow.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -70,20 +71,44 @@ app.listen(port, () => {
 function checkValidity(board, rowLoc, colLoc, num) {
     
     //a. Check validity by row to insert in location
+    if(!checkRowValidity(board, rowLoc, num)) {
+        return false;
+    }
+
+    //b. Check validity by col to insert in location
+    if(!checkColValidity(board, colLoc, num)) {
+        return false;
+    }
+
+    //c. Check validity by 3x3 grid (respective to that location) to insert in location
+    if(!checkBoxValidity(board, rowLoc, colLoc, num)) {
+        return false;
+    }
+
+    //If the number does not exist anywhere in the above conditions, return true
+    return true;
+
+}
+
+function checkRowValidity(board, rowLoc, num) {
     for(var i = 0; i < board.length; i++) {
         if(board[rowLoc][i] == num) {
             return false;
         }
     }
+    return true;
+}
 
-    //b. Check validity by col to insert in location
+function checkColValidity(board, colLoc, num) {
     for(var i = 0; i < board.length; i++) {
         if(board[i][colLoc] == num) {
             return false;
         }
     }
+    return true;
+}
 
-    //c. Check validity by 3x3 grid (respective to that location) to insert in location
+function checkBoxValidity(board, rowLoc, colLoc, num) {
     var size = Math.sqrt(board.length);
     var boxRowStartLoc = rowLoc - rowLoc % size;
     var boxColStartLoc = colLoc - colLoc % size;
@@ -95,10 +120,7 @@ function checkValidity(board, rowLoc, colLoc, num) {
             }
         }
     }
-
-    //If the number does not exist anywhere in the above conditions, return true
     return true;
-
 }
 
 function solveBoard(board) {
