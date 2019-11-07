@@ -54,7 +54,7 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
 });
 
-exports.checkValidity = function(board, rowLoc, colLoc, num) {
+exports.checkValidity = (board, rowLoc, colLoc, num) => {
     
     //a. Check validity by row to insert in location
     if(!exports.checkRowValidity(board, rowLoc, num)) {
@@ -76,7 +76,7 @@ exports.checkValidity = function(board, rowLoc, colLoc, num) {
 
 }
 
-exports.checkRowValidity = function(board, rowLoc, num) {
+exports.checkRowValidity = (board, rowLoc, num) => {
     for(var i = 0; i < board.length; i++) {
         if(board[rowLoc][i] == num) {
             return false;
@@ -85,7 +85,7 @@ exports.checkRowValidity = function(board, rowLoc, num) {
     return true;
 }
 
-exports.checkColValidity = function(board, colLoc, num) {
+exports.checkColValidity = (board, colLoc, num) => {
     for(var i = 0; i < board.length; i++) {
         if(board[i][colLoc] == num) {
             return false;
@@ -94,7 +94,7 @@ exports.checkColValidity = function(board, colLoc, num) {
     return true;
 }
 
-exports.checkBoxValidity = function(board, rowLoc, colLoc, num) {
+exports.checkBoxValidity = (board, rowLoc, colLoc, num) => {
     var size = Math.sqrt(board.length);
     var boxRowStartLoc = rowLoc - rowLoc % size;
     var boxColStartLoc = colLoc - colLoc % size;
@@ -109,14 +109,14 @@ exports.checkBoxValidity = function(board, rowLoc, colLoc, num) {
     return true;
 }
 
-exports.shuffleArray = function(initRow) {
+exports.shuffleArray = (initRow) => {
     for (let i = initRow.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
     }
 }
 
-exports.findUnassignedLocation = function(board, emptyLocArr) {
+exports.findUnassignedLocation = (board, emptyLocArr) => {
     
     for (var i = 0; i < 9; i++) {
         for(var j = 0; j < 9; j++) {
@@ -133,7 +133,7 @@ exports.findUnassignedLocation = function(board, emptyLocArr) {
     return false;
 }
 
-exports.solveBoard = function(board) {
+exports.solveBoard = (board) => {
 
     var boardLength = board.length; //Since it's a symmetric array, length will be equal on both sides
 
