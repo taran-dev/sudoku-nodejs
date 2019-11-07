@@ -1,7 +1,9 @@
 # sudoku-nodejs
 A NodeJS Application for Sudoku, the well-known logic &amp; mathematics based puzzle game.
 
-### Algorithm:
+---
+
+## Algorithm:
 This Application uses the Backtracking algorithm to generate a solved Sudoku Board.  
 Backtacking algorithm solves a problem recursively, by solving each part of the problem incremently until the full problem is solved.
 
@@ -20,18 +22,17 @@ The following logic is implemented:
 6. Board is SOLVED.
 
 
-### Unit Testing:
+## Unit Testing:
 The unit testing for this application was done with Jasmine, and the whole application is designed to follow a Test Driven Development approach. All functions carried out to generate the sudoku board have their own tests.
 
-### Build Application:
-
+## Build Application:
 To build the application,  
 1. Download the solution
 2. Open command prompt (Windows) or terminal (Mac or Linux) in the project root
 3. Run the following command: `npm run build`
 4. The project automatically runs all tests, and builds the application.
 
-#### Note:
+## Note:
 By default the application is hosted on localhost:3000  
 To run the application on a desired port, run the following command to change default port:
 
