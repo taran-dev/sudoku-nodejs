@@ -114,12 +114,10 @@ exports.shuffleArray = function(initRow) {
         const j = Math.floor(Math.random() * (i + 1));
         [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
     }
-    //return initRow;
 }
 
 exports.solveBoard = function(board) {
     var arrLength = board.length; //Since symmetric array, length will be equal on both sides
-    //var colLength = board[0].length;
 
     //2. Search to find next empty location in array
     var rowLoc = 0;
