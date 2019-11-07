@@ -4,8 +4,9 @@
   "description": "Sudoku",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine-node spec",
-    "build": "nodemon models/board.js"
+    "test": "jasmine-node spec --forceexit",
+    "start": "node models/board.js",
+    "build": "npm test && npm start"
   },
   "repository": {
     "type": "git",
