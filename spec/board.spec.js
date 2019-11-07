@@ -6,8 +6,11 @@ describe("board", () => {
     var emptyBoard;
     var validBoard;
     var invalidBoard;
+    var emptyLocArr;
 
     beforeEach(function() {
+
+        emptyLocArr = {"rowLoc": 0, "colLoc": 0};
 
         emptyBoard  = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -44,6 +47,18 @@ describe("board", () => {
             [7, 0, 0, 9, 6, 1, 0, 0, 0],
             [1, 8, 0, 0, 0, 0, 4, 0, 0],
         ];
+
+        solvedBoard = [
+            [5, 9, 8, 6, 1, 3, 7, 2, 4],
+            [2, 1, 7, 4, 9, 8, 6, 3, 5],
+            [4, 6, 3, 7, 2, 5, 8, 9, 1],
+            [6, 7, 1, 3, 5, 2, 9, 4, 8],
+            [9, 4, 2, 8, 7, 6, 5, 1, 3],
+            [8, 3, 5, 1, 4, 9, 2, 6, 7],
+            [3, 2, 6, 5, 8, 4, 1, 7, 9],
+            [7, 5, 4, 9, 6, 1, 3, 8, 2],
+            [1, 8, 9, 2, 3, 7, 4, 5, 6],
+        ];
         
     });
 
@@ -67,7 +82,19 @@ describe("board", () => {
         });
     });
 
-    describe("validate number insertion in partly filled board", () => {
+    describe("find unassigned location in partly solved board", () => {
+        it("returns true if location found", () => {
+            expect(board.findUnassignedLocation(validBoard, emptyLocArr)).toBeTruthy();
+        });
+    });
+
+    describe("find unassigned location in solved board", () => {
+        it("returns false if location not found, meaning that the board is solved", () => {
+            expect(board.findUnassignedLocation(solvedBoard, emptyLocArr)).toBeFalsy();
+        });
+    });
+
+    describe("validate number insertion in partly solved board", () => {
 
         var numberToInsert = 9;
         var rowLocation = 0;
@@ -90,7 +117,6 @@ describe("board", () => {
         });
 
     });
-
     
     describe("validate number insertion in invalid board", () => {
 
