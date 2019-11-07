@@ -116,45 +116,54 @@ exports.shuffleArray = function(initRow) {
     }
 }
 
-exports.solveBoard = function(board) {
-    var arrLength = board.length; //Since symmetric array, length will be equal on both sides
-
-    //2. Search to find next empty location in array
-    var rowLoc = 0;
-    var colLoc = 0;
-    var IsLocationFound = false;
+exports.findUnassignedLocation = function(board, emptyLocArr) {
+    
     for (var i = 0; i < 9; i++) {
         for(var j = 0; j < 9; j++) {
 
             if(board[i][j] == 0) { //Found Empty location
-                rowLoc = i;
-                colLoc = j;
-                IsLocationFound = true;
-                break;
+                emptyLocArr.rowLoc = i;
+                emptyLocArr.colLoc = j;
+
+                return true;
             }
         }
-        
-        if(IsLocationFound) {
-            break;
-        }
     }
-    if(!IsLocationFound)
+
+    return false;
+}
+
+exports.solveBoard = function(board) {
+
+    var boardLength = board.length; //Since it's a symmetric array, length will be equal on both sides
+
+    //2. Search to find next empty location in array
+    var emptyLocArr = {"rowLoc": 0, "colLoc": 0};
+
+    var isLocationFound = exports.findUnassignedLocation(board, emptyLocArr);
+    
+    var rowLoc = emptyLocArr.rowLoc;
+    var colLoc = emptyLocArr.colLoc;
+
+    if(!isLocationFound)
     {
         //Return Filled Array
         return true;
     }
 
     //3. Generate new number between 1 to 9
-    for (var num = 1; num <= arrLength; num++) {
+    for (var num = 1; num <= boardLength; num++) {
 
         //4. Validate before inserting in found location
         var isValid = exports.checkValidity(board, rowLoc, colLoc, num);
 
         if(isValid) {
 
+            //Insert number into board
             board[rowLoc][colLoc] = num;
 
-            if(exports.solveBoard(board, arrLength)) {
+            //5. Repeat step 2, until all locations filled
+            if(exports.solveBoard(board)) {
                 return true; //Solving Complete
             } else {
                 board[rowLoc][colLoc] = 0;
