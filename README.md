@@ -1,8 +1,6 @@
 # sudoku-nodejs
 A NodeJS Application for Sudoku, the well-known logic &amp; mathematics based puzzle game.
 
----
-
 ## Algorithm:
 This Application uses the Backtracking algorithm to generate a solved Sudoku Board.  
 Backtacking algorithm solves a problem recursively, by solving each part of the problem incremently until the full problem is solved.
