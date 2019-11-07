@@ -4,7 +4,7 @@
   "description": "Sudoku",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/jasmine-node spec",
     "build": "nodemon models/board.js"
   },
   "repository": {
@@ -19,6 +19,8 @@
   "homepage": "https://github.com/taran-dev/sudoku-nodejs#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^1.19.4"
+    "jasmine-node": "^3.0.0",
+    "nodemon": "^1.19.4",
+    "request": "^2.88.0"
   }
 }
