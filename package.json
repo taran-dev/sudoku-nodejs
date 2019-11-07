@@ -1,0 +1,27 @@
+{
+  "name": "sudoku-nodejs",
+  "version": "1.0.0",
+  "description": "Sudoku",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node spec --forceexit",
+    "start": "node models/board.js",
+    "build": "npm test && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taran-dev/sudoku-nodejs.git"
+  },
+  "author": "Taran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taran-dev/sudoku-nodejs/issues"
+  },
+  "homepage": "https://github.com/taran-dev/sudoku-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jasmine-node": "^3.0.0",
+    "nodemon": "^1.19.4",
+    "request": "^2.88.0"
+  }
+}
