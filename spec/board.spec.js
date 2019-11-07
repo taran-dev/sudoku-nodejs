@@ -8,7 +8,7 @@ describe("board", () => {
     var invalidBoard;
     var emptyLocArr;
 
-    beforeEach(function() {
+    beforeEach(() => {
 
         emptyLocArr = {"rowLoc": 0, "colLoc": 0};
 
@@ -65,17 +65,17 @@ describe("board", () => {
     describe("solve", () => {
 
         describe("for an invalid board", () => {
-            it("returns false", function() {
+            it("returns false", () => {
               expect(board.solveBoard(invalidBoard)).toBeFalsy();
             });
         });
         describe("for a valid board", () => {
 
-            it("returns true for empty board", function() {
+            it("returns true for empty board", () => {
                 expect(board.solveBoard(emptyBoard)).toBeTruthy();
               });
 
-            it("returns true for semi filled board", function() {
+            it("returns true for semi filled board", () => {
               expect(board.solveBoard(validBoard)).toBeTruthy();
             });
 
@@ -100,19 +100,19 @@ describe("board", () => {
         var rowLocation = 0;
         var colLocation = 1;
 
-        it("returns true if insertion of number in 9x9 board is possible", function() {
+        it("returns true if insertion of number in 9x9 board is possible", () => {
             expect(board.checkValidity(validBoard, rowLocation, colLocation, numberToInsert)).toBeTruthy();
         });
 
-        it("returns true if insertion of number in row is possible", function() {
+        it("returns true if insertion of number in row is possible", () => {
             expect(board.checkRowValidity(validBoard, rowLocation, numberToInsert)).toBeTruthy();
         });
 
-        it("returns true if insertion of number in col is possible", function() {
+        it("returns true if insertion of number in col is possible", () => {
             expect(board.checkColValidity(validBoard, colLocation, numberToInsert)).toBeTruthy();
         });
 
-        it("returns true if insertion of number in 3x3 grid of board is possible", function() {
+        it("returns true if insertion of number in 3x3 grid of board is possible", () => {
             expect(board.checkBoxValidity(validBoard, rowLocation, colLocation, numberToInsert)).toBeTruthy();
         });
 
@@ -124,19 +124,19 @@ describe("board", () => {
         var rowLocation = 0;
         var colLocation = 1;
 
-        it("returns true if insertion of number in 9x9 board is possible", function() {
+        it("returns true if insertion of number in 9x9 board is possible", () => {
             expect(board.checkValidity(invalidBoard, rowLocation, colLocation, numberToInsert)).toBeFalsy();
         });
 
-        it("returns true if insertion of number in row is possible", function() {
+        it("returns true if insertion of number in row is possible", () => {
             expect(board.checkRowValidity(invalidBoard, rowLocation, numberToInsert)).toBeFalsy();
         });
 
-        it("returns true if insertion of number in col is possible", function() {
+        it("returns true if insertion of number in col is possible", () => {
             expect(board.checkColValidity(invalidBoard, colLocation, numberToInsert)).toBeFalsy();
         });
 
-        it("returns true if insertion of number in 3x3 grid of board is possible", function() {
+        it("returns true if insertion of number in 3x3 grid of board is possible", () => {
             expect(board.checkBoxValidity(invalidBoard, rowLocation, colLocation, numberToInsert)).toBeFalsy();
         });
 
