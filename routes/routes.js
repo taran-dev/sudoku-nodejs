@@ -1,10 +1,10 @@
-var BoardController = require("../controllers/board");
+var boardController = require("../controllers/board");
 
 var appRouter = (app) => {
 
     app.get("/sudoku/board", (req, res) => {
         
-        BoardController.getBoard((result) => {
+        boardController.getBoard((result) => {
             console.log(result);          
             res.json(result);
         });

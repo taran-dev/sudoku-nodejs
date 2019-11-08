@@ -1,4 +1,4 @@
-var board = require("../models/board");
+var boardController = require("../controllers/board");
 
 describe("board", () => {
 
@@ -66,17 +66,17 @@ describe("board", () => {
 
         describe("for an invalid board", () => {
             it("returns false", () => {
-              expect(board.solveBoard(invalidBoard)).toBeFalsy();
+              expect(boardController.solveBoard(invalidBoard)).toBeFalsy();
             });
         });
         describe("for a valid board", () => {
 
             it("returns true for empty board", () => {
-                expect(board.solveBoard(emptyBoard)).toBeTruthy();
+                expect(boardController.solveBoard(emptyBoard)).toBeTruthy();
               });
 
             it("returns true for semi filled board", () => {
-              expect(board.solveBoard(validBoard)).toBeTruthy();
+              expect(boardController.solveBoard(validBoard)).toBeTruthy();
             });
 
         });
@@ -84,13 +84,13 @@ describe("board", () => {
 
     describe("find unassigned location in partly solved board", () => {
         it("returns true if location found", () => {
-            expect(board.findUnassignedLocation(validBoard, emptyLocArr)).toBeTruthy();
+            expect(boardController.findUnassignedLocation(validBoard, emptyLocArr)).toBeTruthy();
         });
     });
 
     describe("find unassigned location in solved board", () => {
         it("returns false if location not found, meaning that the board is solved", () => {
-            expect(board.findUnassignedLocation(solvedBoard, emptyLocArr)).toBeFalsy();
+            expect(boardController.findUnassignedLocation(solvedBoard, emptyLocArr)).toBeFalsy();
         });
     });
 
@@ -101,19 +101,19 @@ describe("board", () => {
         var colLocation = 1;
 
         it("returns true if insertion of number in 9x9 board is possible", () => {
-            expect(board.checkValidity(validBoard, rowLocation, colLocation, numberToInsert)).toBeTruthy();
+            expect(boardController.checkValidity(validBoard, rowLocation, colLocation, numberToInsert)).toBeTruthy();
         });
 
         it("returns true if insertion of number in row is possible", () => {
-            expect(board.checkRowValidity(validBoard, rowLocation, numberToInsert)).toBeTruthy();
+            expect(boardController.checkRowValidity(validBoard, rowLocation, numberToInsert)).toBeTruthy();
         });
 
         it("returns true if insertion of number in col is possible", () => {
-            expect(board.checkColValidity(validBoard, colLocation, numberToInsert)).toBeTruthy();
+            expect(boardController.checkColValidity(validBoard, colLocation, numberToInsert)).toBeTruthy();
         });
 
         it("returns true if insertion of number in 3x3 grid of board is possible", () => {
-            expect(board.checkBoxValidity(validBoard, rowLocation, colLocation, numberToInsert)).toBeTruthy();
+            expect(boardController.checkBoxValidity(validBoard, rowLocation, colLocation, numberToInsert)).toBeTruthy();
         });
 
     });
@@ -125,19 +125,19 @@ describe("board", () => {
         var colLocation = 1;
 
         it("returns true if insertion of number in 9x9 board is possible", () => {
-            expect(board.checkValidity(invalidBoard, rowLocation, colLocation, numberToInsert)).toBeFalsy();
+            expect(boardController.checkValidity(invalidBoard, rowLocation, colLocation, numberToInsert)).toBeFalsy();
         });
 
         it("returns true if insertion of number in row is possible", () => {
-            expect(board.checkRowValidity(invalidBoard, rowLocation, numberToInsert)).toBeFalsy();
+            expect(boardController.checkRowValidity(invalidBoard, rowLocation, numberToInsert)).toBeFalsy();
         });
 
         it("returns true if insertion of number in col is possible", () => {
-            expect(board.checkColValidity(invalidBoard, colLocation, numberToInsert)).toBeFalsy();
+            expect(boardController.checkColValidity(invalidBoard, colLocation, numberToInsert)).toBeFalsy();
         });
 
         it("returns true if insertion of number in 3x3 grid of board is possible", () => {
-            expect(board.checkBoxValidity(invalidBoard, rowLocation, colLocation, numberToInsert)).toBeFalsy();
+            expect(boardController.checkBoxValidity(invalidBoard, rowLocation, colLocation, numberToInsert)).toBeFalsy();
         });
 
     });

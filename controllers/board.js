@@ -15,7 +15,7 @@ Using Backtracking Algorithm (generating empty array and adding item one by one)
 >>6. Return 9x9 complete array
 */
 
-function BoardController() { };
+var BoardController = new Object();
 
 //GET 9x9 Valid Sudoku Array
 BoardController.getBoard = (result) => {
@@ -37,30 +37,30 @@ BoardController.getBoard = (result) => {
     var initRow = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     //Shuffling initRow using Fisher-Yates algorithm
-    exports.shuffleArray(initRow);
+    BoardController.shuffleArray(initRow);
     
     board[0] = initRow;
 
-    exports.solveBoard(board);
+    BoardController.solveBoard(board);
 
     //6. Return 9x9 complete array
     result(board);
 };
 
-exports.checkValidity = (board, rowLoc, colLoc, num) => {
+BoardController.checkValidity = (board, rowLoc, colLoc, num) => {
     
     //a. Check validity by row to insert in location
-    if(!exports.checkRowValidity(board, rowLoc, num)) {
+    if(!BoardController.checkRowValidity(board, rowLoc, num)) {
         return false;
     }
 
     //b. Check validity by col to insert in location
-    if(!exports.checkColValidity(board, colLoc, num)) {
+    if(!BoardController.checkColValidity(board, colLoc, num)) {
         return false;
     }
 
     //c. Check validity by 3x3 grid (respective to that location) to insert in location
-    if(!exports.checkBoxValidity(board, rowLoc, colLoc, num)) {
+    if(!BoardController.checkBoxValidity(board, rowLoc, colLoc, num)) {
         return false;
     }
 
@@ -69,7 +69,7 @@ exports.checkValidity = (board, rowLoc, colLoc, num) => {
 
 }
 
-exports.checkRowValidity = (board, rowLoc, num) => {
+BoardController.checkRowValidity = (board, rowLoc, num) => {
     for(var i = 0; i < board.length; i++) {
         if(board[rowLoc][i] == num) {
             return false;
@@ -78,7 +78,7 @@ exports.checkRowValidity = (board, rowLoc, num) => {
     return true;
 }
 
-exports.checkColValidity = (board, colLoc, num) => {
+BoardController.checkColValidity = (board, colLoc, num) => {
     for(var i = 0; i < board.length; i++) {
         if(board[i][colLoc] == num) {
             return false;
@@ -87,7 +87,7 @@ exports.checkColValidity = (board, colLoc, num) => {
     return true;
 }
 
-exports.checkBoxValidity = (board, rowLoc, colLoc, num) => {
+BoardController.checkBoxValidity = (board, rowLoc, colLoc, num) => {
     var size = Math.sqrt(board.length);
     var boxRowStartLoc = rowLoc - rowLoc % size;
     var boxColStartLoc = colLoc - colLoc % size;
@@ -102,14 +102,14 @@ exports.checkBoxValidity = (board, rowLoc, colLoc, num) => {
     return true;
 }
 
-exports.shuffleArray = (initRow) => {
+BoardController.shuffleArray = (initRow) => {
     for (let i = initRow.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
     }
 }
 
-exports.findUnassignedLocation = (board, emptyLocArr) => {
+BoardController.findUnassignedLocation = (board, emptyLocArr) => {
     
     for (var i = 0; i < 9; i++) {
         for(var j = 0; j < 9; j++) {
@@ -126,14 +126,14 @@ exports.findUnassignedLocation = (board, emptyLocArr) => {
     return false;
 }
 
-exports.solveBoard = (board) => {
+BoardController.solveBoard = (board) => {
 
     var boardLength = board.length; //Since it's a symmetric array, length will be equal on both sides
 
     //2. Search to find next empty location in array
     var emptyLocArr = {"rowLoc": 0, "colLoc": 0};
 
-    var isLocationFound = exports.findUnassignedLocation(board, emptyLocArr);
+    var isLocationFound = BoardController.findUnassignedLocation(board, emptyLocArr);
     
     var rowLoc = emptyLocArr.rowLoc;
     var colLoc = emptyLocArr.colLoc;
@@ -148,7 +148,7 @@ exports.solveBoard = (board) => {
     for (var num = 1; num <= boardLength; num++) {
 
         //4. Validate before inserting in found location
-        var isValid = exports.checkValidity(board, rowLoc, colLoc, num);
+        var isValid = BoardController.checkValidity(board, rowLoc, colLoc, num);
 
         if(isValid) {
 
@@ -156,7 +156,7 @@ exports.solveBoard = (board) => {
             board[rowLoc][colLoc] = num;
 
             //5. Repeat step 2, until all locations filled
-            if(exports.solveBoard(board)) {
+            if(BoardController.solveBoard(board)) {
                 return true; //Solving Complete
             } else {
                 board[rowLoc][colLoc] = 0;
@@ -165,6 +165,5 @@ exports.solveBoard = (board) => {
     }
     return false;
 }
-
 
 module.exports = BoardController;
