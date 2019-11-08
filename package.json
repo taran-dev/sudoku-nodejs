@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/taran-dev/sudoku-nodejs#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "jasmine-node": "^3.0.0",
     "nodemon": "^1.19.4",
