@@ -43,8 +43,15 @@ BoardController.getBoard = (result) => {
 
     BoardController.solveBoard(board);
 
-    //6. Return 9x9 complete array
-    result(board);
+    //6. Return Array of 81 Integers
+    var resultArray = [];
+    for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board.length; j++) {
+            resultArray.push(board[i][j]);
+        }
+    }
+
+    result(resultArray);
 };
 
 BoardController.checkValidity = (board, rowLoc, colLoc, num) => {
