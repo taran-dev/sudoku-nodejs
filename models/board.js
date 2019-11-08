@@ -15,11 +15,10 @@ Using Backtracking Algorithm (generating empty array and adding item one by one)
 >>6. Return 9x9 complete array
 */
 
-const express = require("express");
-const app = express();
+function BoardModel() { };
 
 //GET 9x9 Valid Sudoku Array
-app.get("/sudoku/board", (req, res) => {
+BoardModel.getBoard = (result) => {
 
     //1. Generate default 9x9 Array
     const board = [
@@ -43,16 +42,10 @@ app.get("/sudoku/board", (req, res) => {
     board[0] = initRow;
 
     exports.solveBoard(board);
-    console.log(board);
 
     //6. Return 9x9 complete array
-    res.send(board);
-});
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Listening on port ${port}...`);
-});
+    result(board);
+};
 
 exports.checkValidity = (board, rowLoc, colLoc, num) => {
     
@@ -172,3 +165,6 @@ exports.solveBoard = (board) => {
     }
     return false;
 }
+
+
+module.exports = BoardModel;
