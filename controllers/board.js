@@ -15,10 +15,10 @@ Using Backtracking Algorithm (generating empty array and adding item one by one)
 >>6. Return 9x9 complete array
 */
 
-function BoardModel() { };
+function BoardController() { };
 
 //GET 9x9 Valid Sudoku Array
-BoardModel.getBoard = (result) => {
+BoardController.getBoard = (result) => {
 
     //1. Generate default 9x9 Array
     const board = [
@@ -167,4 +167,4 @@ exports.solveBoard = (board) => {
 }
 
 
-module.exports = BoardModel;
+module.exports = BoardController;
