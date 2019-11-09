@@ -1,1 +1,21 @@
-<p>board works!</p>
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="text-center col-sm-6">
+            <h2>Sudoku</h2>
+            <br />
+            <table class="table table-bordered">
+                <tr *ngFor="let row of board">
+                    <td *ngFor="let col of row">
+                        {{col}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BoardService } from './../../services/board.service';
 
 @Component({
   selector: 'app-board',
@@ -7,9 +8,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  constructor() { }
+  board: any = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
 
   ngOnInit() {
+    var self = this;
+    
+    self.boardService.getBoard().subscribe(result => {
+
+      console.log("Recevied new 9x9 Solved Board");
+      console.log(result);
+      
+      //Convert retrived array to a 2D Array
+      var size = Math.sqrt(result.length);
+      console.log(size);
+      var k = 0;
+      for(var i=0; i<size; i++) {
+        for(var j=0; j<size; j++){
+          self.board[i][j] = result[k];
+          k++;
+        }
+      }
+      
+      console.log(self.board);
+    });
+    
   }
+
+  constructor(private boardService: BoardService) { }
 
 }
