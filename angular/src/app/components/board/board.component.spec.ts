@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { BoardService } from './../../services/board.service';
 
 import { BoardComponent } from './board.component';
 
@@ -8,7 +10,9 @@ describe('BoardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardComponent ]
+      declarations: [ BoardComponent ],
+      imports: [ HttpClientModule ],
+      providers: [BoardService]
     })
     .compileComponents();
   }));
