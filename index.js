@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
-app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors({origin: "http://localhost:8080"}));
 
 // All routes to be used in this application
 var routes = require("./routes/routes.js");
