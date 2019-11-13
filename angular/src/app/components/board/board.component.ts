@@ -23,7 +23,8 @@ export class BoardComponent implements OnInit {
   board1D: number[];
   selectedRowIndex: any;
   selectedColIndex: any;
-
+  toggleCell: boolean = false;
+  
   ngOnInit() {
     var self = this;
     
@@ -79,7 +80,10 @@ export class BoardComponent implements OnInit {
     if(self.selectedRowIndex == i && self.selectedColIndex == j)
     {
       //console.log("Selecting Cell: [" + i + "][" + j + "]");
-      return 'highlight';
+      if(self.toggleCell)
+        return 'highlight';
+      else
+        return '';
     }
 
   }
@@ -91,11 +95,22 @@ export class BoardComponent implements OnInit {
 
   setRowCol(i: number, j: number) {
     var self = this;
-    console.log("Value changed: ", i, j)
-    self.selectedRowIndex = i;
-    self.selectedColIndex = j;
 
-    self.highlightCell(i, j);
+    if(self.selectedRowIndex == i &&  self.selectedColIndex == j) {
+      console.log("Value not changed: ", i, j);
+      console.log("Initiate Toggle");
+
+      self.toggleCell = false;
+    }
+    else
+    {
+      console.log("Value changed: ", i, j);
+
+      self.toggleCell = true;
+      self.selectedRowIndex = i;
+      self.selectedColIndex = j;
+    }
+
   }
 
   constructor(
