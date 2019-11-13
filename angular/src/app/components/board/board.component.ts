@@ -25,13 +25,7 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     var self = this;
     
-    self.spinnerService.show();
-    self.boardService.getBoard().subscribe(result => {
-      self.spinnerService.hide();
-
-      self.board1D = result;
-      self.board = self.create2DArray(result);
-    });
+    self.refreshBoard();
     
   }
 
