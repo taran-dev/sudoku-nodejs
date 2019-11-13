@@ -64,6 +64,18 @@ export class BoardComponent implements OnInit {
     return board2D;
   }
 
+  refreshBoard() {
+    var self = this;
+    
+    self.spinnerService.show();
+    self.boardService.getBoard().subscribe(result => {
+      self.spinnerService.hide();
+
+      self.board1D = result;
+      self.board = self.create2DArray(result);
+    });
+  }
+
   constructor(
     private boardService: BoardService
     , private spinnerService: NgxSpinnerService) { }
