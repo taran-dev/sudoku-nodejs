@@ -17,8 +17,11 @@
             <h2>Sudoku</h2>
             <br />
             <table class="table table-bordered">
-                <tr *ngFor="let row of board">
-                    <td *ngFor="let col of row">
+                <tr *ngFor="let row of board; let i = index;">
+                    <td *ngFor="let col of row; let j = index;" (click)="setRowCol(i, j)" [ngClass]="highlightCell(i, j)">
+                        <!-- <button type="button" class="btn btn-light btn-sudoku" data-toggle="button" aria-pressed="false" autocomplete="off">{{col}}</button> -->
+                        <!-- <button class="btn btn-light btn-sudoku" (click)="setRow(i)" [ngClass]="{'highlight': selectedIndex === i}">{{col}}</button>
+                        <button></button> -->
                         {{col}}
                     </td>
                 </tr>

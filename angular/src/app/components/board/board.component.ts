@@ -21,6 +21,8 @@ export class BoardComponent implements OnInit {
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
   board1D: number[];
+  selectedRowIndex: any;
+  selectedColIndex: any;
 
   ngOnInit() {
     var self = this;
@@ -68,6 +70,32 @@ export class BoardComponent implements OnInit {
       self.board1D = result;
       self.board = self.create2DArray(result);
     });
+  }
+
+  highlightCell(i: number, j: number) {
+    var self = this;
+    //let cssClass;
+    
+    if(self.selectedRowIndex == i && self.selectedColIndex == j)
+    {
+      //console.log("Selecting Cell: [" + i + "][" + j + "]");
+      return 'highlight';
+    }
+
+  }
+
+  // setRow(_index: number) {
+  //   var self = this;
+  //   self.selectedRowIndex = _index;
+  // }
+
+  setRowCol(i: number, j: number) {
+    var self = this;
+    console.log("Value changed: ", i, j)
+    self.selectedRowIndex = i;
+    self.selectedColIndex = j;
+
+    self.highlightCell(i, j);
   }
 
   constructor(

@@ -1,0 +1,15 @@
+td.td-sudoku {
+    padding: 0 !important;
+}
+
+td:selected {
+    background-color: red;
+}
+
+button.btn-sudoku {
+    width: 60px;
+    height: 55px;
+    border-radius: 0;
+}
+
+.highlight{ background-color: green }
