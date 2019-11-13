@@ -4,6 +4,7 @@ import { BoardService } from './../../services/board.service';
 import { BoardComponent } from './board.component';
 import { from, Observable, Observer } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -13,7 +14,7 @@ describe('BoardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BoardComponent ],
-      imports: [ HttpClientTestingModule ],
+      imports: [ HttpClientTestingModule, NgxSpinnerModule ],
       providers: [ BoardService ]
     })
     .compileComponents();
@@ -61,7 +62,7 @@ describe('BoardComponent', () => {
     //     })
     //   );
       
-      component.ngOnInit();
+      component.refreshBoard();
       
       var resultBoard = component.board1D;
 
