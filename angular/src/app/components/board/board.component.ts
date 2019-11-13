@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from './../../services/board.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-board',
@@ -24,12 +25,12 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     var self = this;
     
+    self.spinnerService.show();
     self.boardService.getBoard().subscribe(result => {
+      self.spinnerService.hide();
 
       self.board1D = result;
-      
       self.board = self.create2DArray(result);
-      
     });
     
   }
@@ -63,6 +64,8 @@ export class BoardComponent implements OnInit {
     return board2D;
   }
 
-  constructor(private boardService: BoardService) { }
+  constructor(
+    private boardService: BoardService
+    , private spinnerService: NgxSpinnerService) { }
 
 }

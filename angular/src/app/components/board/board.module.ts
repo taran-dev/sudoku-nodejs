@@ -4,6 +4,7 @@ import { BoardRoutingModule } from './board-routing.module';
 import { BoardService } from './../../services/board.service';
 import { BoardComponent } from './board.component';
 import { CommonModule } from '@angular/common';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     BoardRoutingModule,
-    CommonModule
+    CommonModule,
+    NgxSpinnerModule
   ],
   providers: [BoardService],
   bootstrap: [BoardComponent]

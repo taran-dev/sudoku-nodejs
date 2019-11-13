@@ -15,7 +15,7 @@ export class BoardService {
   getBoard(): Observable<Array<number>> {
     var self = this;
     return self.http.get<Array<number>>(self.baseUrl + "/sudoku/board");
-}
+  }
 
   constructor(private http: HttpClient) { }
 
