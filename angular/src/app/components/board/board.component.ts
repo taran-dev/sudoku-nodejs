@@ -75,11 +75,9 @@ export class BoardComponent implements OnInit {
 
   highlightCell(i: number, j: number) {
     var self = this;
-    //let cssClass;
     
     if(self.selectedRowIndex == i && self.selectedColIndex == j)
     {
-      //console.log("Selecting Cell: [" + i + "][" + j + "]");
       if(self.toggleCell)
         return 'highlight';
       else
@@ -87,11 +85,6 @@ export class BoardComponent implements OnInit {
     }
 
   }
-
-  // setRow(_index: number) {
-  //   var self = this;
-  //   self.selectedRowIndex = _index;
-  // }
 
   setRowCol(i: number, j: number) {
     var self = this;
