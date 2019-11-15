@@ -23,11 +23,20 @@ export class BoardComponent implements OnInit {
   board1D: number[];
   selectedRowIndex: any;
   selectedColIndex: any;
+  
+  selectedLocation: {"row": number, "col": number};
+  selectedNumber: number;
+
   toggleCell: boolean = false;
   
   ngOnInit() {
     var self = this;
     
+    self.selectedLocation = {
+      row: self.selectedRowIndex,
+      col: self.selectedColIndex
+    }
+
     self.refreshBoard();
     
   }
@@ -65,12 +74,14 @@ export class BoardComponent implements OnInit {
     var self = this;
     
     self.spinnerService.show();
-    self.boardService.getBoard().subscribe(result => {
+
+    self.boardService.getBoard(self.selectedNumber, self.selectedLocation).subscribe(result => {
       self.spinnerService.hide();
 
       self.board1D = result;
       self.board = self.create2DArray(result);
     });
+    
   }
 
   highlightCell(i: number, j: number) {
@@ -86,22 +97,25 @@ export class BoardComponent implements OnInit {
 
   }
 
-  setRowCol(i: number, j: number) {
+  setRowCol(i: number, j: number, num: number) {
     var self = this;
 
     if(self.selectedRowIndex == i &&  self.selectedColIndex == j) {
-      console.log("Value not changed: ", i, j);
-      console.log("Initiate Toggle");
-
+      self.selectedNumber = undefined;
       self.toggleCell = false;
+
+      self.selectedLocation.row = undefined;
+      self.selectedLocation.col = undefined;
     }
     else
     {
-      console.log("Value changed: ", i, j);
-
       self.toggleCell = true;
       self.selectedRowIndex = i;
       self.selectedColIndex = j;
+      self.selectedNumber = num;
+
+      self.selectedLocation.row = self.selectedRowIndex;
+      self.selectedLocation.col = self.selectedColIndex;
     }
 
   }

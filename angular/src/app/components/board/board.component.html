@@ -18,7 +18,7 @@
             <br />
             <table class="table table-bordered">
                 <tr *ngFor="let row of board; let i = index;">
-                    <td *ngFor="let col of row; let j = index;" (click)="setRowCol(i, j)" [ngClass]="highlightCell(i, j)">
+                    <td *ngFor="let col of row; let j = index;" (click)="setRowCol(i, j, col)" [ngClass]="highlightCell(i, j)">
                         {{col}}
                     </td>
                 </tr>

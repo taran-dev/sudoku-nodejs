@@ -10,11 +10,11 @@ import config from '../../../config.json';
 export class BoardService {
 
   baseUrl: string = config.apiBaseUrl; // URL to web api
-
-  //Get Board Array from Server
-  getBoard(): Observable<Array<number>> {
+  
+  //Get Board Array from Server with Inputs
+  getBoard(selectedNum, selectedLoc): Observable<Array<number>> {
     var self = this;
-    return self.http.get<Array<number>>(self.baseUrl + "/sudoku/board");
+    return self.http.get<Array<number>>(self.baseUrl + "/sudoku/board?num=" + selectedNum + "&row=" + selectedLoc.row + "&col=" + selectedLoc.col);
   }
 
   constructor(private http: HttpClient) { }
