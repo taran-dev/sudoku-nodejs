@@ -42,27 +42,42 @@ describe("BoardService", () => {
         1, 8, 9, 2, 3, 7, 4, 5, 6
       ];
 
-    it("should return an Observable Array of integers", () => {
+    let selectedLoc = {"row": undefined, "col": undefined};
+
+    it("should return an Observable Array of integers for empty inputs", () => {
       
-      // spyOn(boardService, "getBoard").and.callFake(() => {
-      //     return from([board]);
-      // });
-  
       var resultBoard: any;
-      
-      boardService.getBoard().subscribe(result => {
+      var selectedNum = undefined;
+
+      boardService.getBoard(selectedNum, selectedLoc).subscribe(result => {
         resultBoard = result;
         expect(resultBoard).toBe(board);
       });
 
-      // let req = httpMock.expectOne(`${boardService.baseUrl}`);
-      // expect(req.request.method).toBe("GET");
-      const req = httpMock.expectOne({ method: 'GET', url: `${boardService.baseUrl}/sudoku/board`});
+      const req = httpMock.expectOne({ method: 'GET', url: `${boardService.baseUrl}/sudoku/board?num=${selectedNum}&row=${selectedLoc.row}&col=${selectedLoc.col}`});
       req.flush(board);
       httpMock.verify();
       
     });
   
+    it("should return an Observable Array of integers for selected number on board", () => {
+      
+      var resultBoard: any;
+      var selectedNum = 7;
+      selectedLoc.row = 1;
+      selectedLoc.col = 2;
+
+      boardService.getBoard(selectedNum, selectedLoc).subscribe(result => {
+        resultBoard = result;
+        expect(resultBoard).toBe(board);
+      });
+
+      const req = httpMock.expectOne({ method: 'GET', url: `${boardService.baseUrl}/sudoku/board?num=${selectedNum}&row=${selectedLoc.row}&col=${selectedLoc.col}`});
+      req.flush(board);
+      httpMock.verify();
+      
+    });
+
   });
   
  });
