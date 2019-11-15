@@ -18,48 +18,7 @@ Using Backtracking Algorithm (generating empty array and adding item one by one)
 var BoardController = new Object();
 
 //GET 9x9 Valid Sudoku Array
-// BoardController.getBoard = (result) => {
-
-//     //1. Generate default 9x9 Array
-//     const board = [
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0]
-//     ];
-
-//     //Randomizing first row, to ensure every board generation is randomized
-//     var initRow = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-//     //Shuffling initRow using Fisher-Yates algorithm
-//     BoardController.shuffleArray(initRow);
-    
-//     board[0] = initRow;
-
-//     BoardController.solveBoard(board);
-
-//     //6. Return Array of 81 Integers
-//     var resultArray = [];
-//     for (var i = 0; i < board.length; i++) {
-//         for (var j = 0; j < board.length; j++) {
-//             resultArray.push(board[i][j]);
-//         }
-//     }
-
-//     result(resultArray);
-// };
-
 BoardController.getBoard = (selectedNum, selectedRow, selectedCol) => {
-
-    console.log("Entered GetBoardByNumLocation");
-    console.log(selectedNum);
-    console.log(selectedRow);
-    console.log(selectedCol);
     
     //1. Generate default 9x9 Array
     const board = [
@@ -154,16 +113,6 @@ BoardController.shuffleArray = (initRow) => {
     for (let i = initRow.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
-    }
-
-}
-
-BoardController.shuffleArrayByLoc = (initRow, selectedCol) => {
-
-    for (let i = initRow.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        if(j != selectedCol)
-            [initRow[i], initRow[j]] = [initRow[j], initRow[i]];
     }
 
 }
