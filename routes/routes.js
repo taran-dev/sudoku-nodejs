@@ -4,9 +4,13 @@ var appRouter = (app) => {
 
     app.get("/sudoku/board", (req, res) => {
         
-        boardController.getBoard((result) => {
-            res.json(result);
-        });
+        var num = req.query.num;
+        var row = req.query.row;
+        var col = req.query.col;
+        
+        var result = boardController.getBoard(num, row, col);
+        res.json(result);
+        
     });
 
 }
