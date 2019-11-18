@@ -54,14 +54,6 @@ describe('BoardComponent', () => {
           return from([board]);
       });
       
-
-    // spyOn(boardService, "getBoard").and.returnValue(
-    //     Observable.create((observer: Observer<number[]>) => {
-    //       observer.next(board);
-    //       return observer;
-    //     })
-    //   );
-      
       component.refreshBoard();
       
       var resultBoard = component.board1D;
