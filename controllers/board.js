@@ -21,7 +21,7 @@ var BoardController = new Object();
 BoardController.getBoard = (selectedNum, selectedRow, selectedCol) => {
     
     //1. Generate default 9x9 Array
-    const board = [
+    var board = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
